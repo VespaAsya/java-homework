@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+// Первая задача запускает все тесты проекта.
+tasks.register('runAllTests') {
+    dependsOn 'test'
+    finalizedBy 'testRunIsOver'
+}
+
+// Вторая задача запускается после первой.
+tasks.register('testRunIsOver') {
+    doLast {
+        println 'Test run is over'
+    }
+}
